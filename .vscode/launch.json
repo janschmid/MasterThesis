@@ -1,1 +1,82 @@
-../../.vscode/launch.json
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${fileDirname}"
+        },
+        {
+            "name": "Python: deepspeed",
+            "type": "python",
+            "request": "launch",
+            "program": "/media/jan/Data/ubuntu_data_dir/git/MasterThesis/FenderDetection/deepspeed/run_deepspeed_model.py",
+            "console": "integratedTerminal",
+            "cwd": "${fileDirname}"
+        },
+        {
+            "name": "Python: test",
+            "type": "python",
+            "request": "launch",
+            "program": "/media/jan/Data/ubuntu_data_dir/git/MasterThesis/FenderDetection/deepspeed/test.py",
+            "console": "integratedTerminal",
+            "cwd": "${fileDirname}"
+        },
+        {
+            "name": "Python: DeepstreamDSSD",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${fileDirname}",
+            "args": ["-d", "-i",  
+            // "file:///media/jan/Data/ubuntu_data_dir/git/LorenzTao/fenderUnbroken.mp4",
+            // "file:///media/jan/Data/ubuntu_data_dir/git/LorenzTao/inspection2Fender.mp4",
+            "file:///media/jan/Data/ubuntu_data_dir/git/MasterThesis/datadrive/git/LorenzTao/nvidia-tao/yolo_v4_tiny/workspace/data/val/images/images.h264",
+            // "file:///media/jan/Data/ubuntu_data_dir/git/MasterThesis/output.mp4",
+            "-l", "/media/jan/Data/ubuntu_data_dir/git/MasterThesis/datadrive/git/LorenzTao/nvidia-tao/yolo_v4_tiny/workspace/data/val/labels/",
+            "-n", "/media/jan/Data/ubuntu_data_dir/git/MasterThesis/datadrive/git/LorenzTao/nvidia-tao/yolo_v4_tiny/workspace/data/val/images/ordered_file_list.csv",
+            "-o", "/media/jan/Data/ubuntu_data_dir/git/MasterThesis/deepstream/debug/whatever.mp4"]
+        },
+        {
+            "name": "Python: color_thresholder",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            // "args": ["-e", "2d_scatter", "-o", "color_thresholder_dssd"]
+            // "args": ["-e", "stats", "2d_scatter", "-i", "/media/jan/Data/ubuntu_data_dir/git/MasterThesis/deepstream/out_crops/stream_0/Fender", "-c", "-o", "color_thresholder_dssd"]
+            // "args": ["-e", "train", "stats", "-i", "/media/jan/Data/ubuntu_data_dir/git/MasterThesis/deepstream/out_crops/stream_0/Fender", "-c", "-o", "test"]
+            "args": ["-e", "none", "-i", "/media/jan/Data/ubuntu_data_dir/git/output_0.99/cropped_images/fender/", "-o", "test"]
+            
+        },
+        {
+            "name": "Python: azure_to_tf",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${fileDirname}",
+            "args": ["port_ai_20220216_150850",
+                "--output_path",
+            "/media/jan/Data/ubuntu_data_dir/git/LorenzTao/debutOutput",
+                "--type", "kitti",
+                 "-l", "-d"]
+        },
+        {
+            "name": "Python: DeepstreamTest2",
+            "type": "python",
+            "request": "launch",
+            "program": "/media/jan/Data/ubuntu_data_dir/git/MasterThesis/deepstream/nvidiaIOT_deepstream_python_apps/apps/deepstream-test2/deepstream_test_2.py",
+            "console": "integratedTerminal",
+            "cwd": "/media/jan/Data/ubuntu_data_dir/git/MasterThesis/deepstream/nvidiaIOT_deepstream_python_apps/apps/deepstream-test2",
+            "args": ["/opt/nvidia/deepstream/deepstream/samples/streams/sample_qHD.h264"]
+        },
+    ]
+}

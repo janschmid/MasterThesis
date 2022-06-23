@@ -1,5 +1,4 @@
 *.pyc
-!.vscode/launch.json
 deepstream/out_crops/
 deepstream/config/export
 *.onnx
