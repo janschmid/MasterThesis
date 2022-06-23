@@ -1,0 +1,48 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+fail_fast: true
+repos:
+  - repo: https://github.com/econchick/interrogate
+    rev: 1.5.0  
+    hooks:
+    - id: interrogate
+      args: [-vv, -c, pyproject.toml]
+      
+  - repo: local
+    hooks:
+      - id: autoflake
+        name: Remove unused variables and imports
+        entry: bash -c 'autoflake "$@"; git add -u' --
+        language: python
+        args:
+          [
+            "--in-place",
+            "--remove-all-unused-imports",
+            "--remove-unused-variables",
+            "--ignore-init-module-imports",
+          ]
+        files: \.py$
+
+
+      - id: create requirements
+        name: create requirements
+        entry: sh write_requirements.sh
+        language: system
+        always_run: true
+        pass_filenames: false
+  
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+        name: isort (python)
+        args: ["--filter-files", "--line-length", "120"]
+        files: \.py$
+
+  - repo: https://github.com/psf/black
+    rev: 22.1.0
+    hooks:
+    - id: black
+      
+    
+    

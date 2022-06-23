@@ -1,0 +1,21 @@
+{
+    "python.analysis.extraPaths": ["FenderDetection", "HelperFunctions"],
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "Classification-Report":true,
+        "data":false,
+        "debug": true,
+        "early-stopping-pytorch":true,
+        "export_ds6_pruned":true,
+        "ladder_dataset": true,
+        "runs": true,
+        "tensorboard": true,
+        "tensorboard_ds":true,
+        "torchsample":true
+    }
+}

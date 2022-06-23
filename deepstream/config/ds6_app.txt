@@ -1,0 +1,131 @@
+################################################################################
+# Copyright (c) 2020, NVIDIA CORPORATION. All rights reserved.
+#
+# Permission is hereby granted, free of charge, to any person obtaining a
+# copy of this software and associated documentation files (the "Software"),
+# to deal in the Software without restriction, including without limitation
+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
+# and/or sell copies of the Software, and to permit persons to whom the
+# Software is furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+# DEALINGS IN THE SOFTWARE.
+################################################################################
+
+[application]
+enable-perf-measurement=1
+perf-measurement-interval-sec=1
+
+[tiled-display]
+enable=1
+rows=1
+columns=1
+width=1920
+height=1080
+gpu-id=0
+
+[source0]
+enable=1
+#Type - 1=CameraV4L2 2=URI 3=MultiURI
+type=3
+num-sources=1
+uri=file:///mnt/ssd/video/video.mp4
+gpu-id=0
+
+[primary-gie]
+enable=1
+gpu-id=0
+gie-unique-id=1
+# Modify as necessary
+batch-size=1
+#Required by the app for OSD, not a plugin property
+bbox-border-color0=1;0;0;1
+bbox-border-color1=1;1;1;1
+bbox-border-color2=1;0;1;1
+bbox-border-color3=1;1;0;1
+config-file=tao_portai_classification.txt
+interval=0
+
+[secondary-gie0]
+enable=1
+gpu-id=0
+# Modify as necessary
+batch-size=1
+gie-unique-id=2
+operate-on-class-ids=0;2;
+operate-on-gie-id=1
+config-file=tao_portai_classification/fender_config.txt
+interval=0
+
+[secondary-gie1]
+enable=1
+gpu-id=0
+# Modify as necessary
+batch-size=1
+gie-unique-id=3
+operate-on-class-ids=1;
+operate-on-gie-id=1
+config-file=tao_portai_classification/ladder_config.txt
+interval=0
+
+[osd]
+enable=1
+gpu-id=0
+border-width=3
+text-size=15
+text-color=1;1;1;1;
+text-bg-color=0.3;0.3;0.3;1
+font=Arial
+
+[streammux]
+gpu-id=0
+batch-size=1
+batched-push-timeout=40000
+live-source=0 # set to 1 to run model in full speed, 0 in real time
+## Set muxer output width and height
+width=1500
+height=480
+
+
+[sink0]
+enable=1
+type=3
+#1=mp4 2=mkv
+container=1
+#1=h264 2=h265 3=mpeg4
+codec=1
+#encoder type 0=Hardware 1=Software
+enc-type=0
+sync=1
+bitrate=2000000
+#H264 Profile - 0=Baseline 2=Main 4=High
+#H265 Profile - 0=Main 1=Main10
+profile=0
+output-file=output.mp4
+source-id=0
+
+[sink1]
+enable=1
+type=1
+sync=1
+
+[tracker]
+enable=1
+# For NvDCF and DeepSORT tracker, tracker-width and tracker-height must be a multiple of 32, respectively
+tracker-width=864
+tracker-height=480
+ll-lib-file=/opt/nvidia/deepstream/deepstream-6.0/lib/libnvds_nvmultiobjecttracker.so
+# ll-config-file required to set different tracker types
+ll-config-file=tracker_config.yml
+gpu-id=0
+enable-batch-process=1
+enable-past-frame=1
+display-tracking-id=1

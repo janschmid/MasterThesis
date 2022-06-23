@@ -1,0 +1,15 @@
+classification_report==1.0.0
+kornia==0.6.5
+matplotlib==3.3.4
+numpy==1.19.5
+opencv_contrib_python==4.5.5.62
+pandas==1.1.5
+Pillow==9.1.1
+pytorchtools==0.0.2
+scikit_learn==1.1.1
+scipy==1.5.2
+Send2Trash==1.8.0
+tensorboard==2.4.1
+torch==1.10.2
+torchvision==0.11.3+cu113
+tqdm==4.63.0

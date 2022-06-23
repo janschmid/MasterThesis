@@ -1,0 +1,82 @@
+################################################################################
+# SPDX-FileCopyrightText: Copyright (c) 2019-2021 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+################################################################################
+
+# Following properties are mandatory when engine files are not specified:
+#   int8-calib-file(Only in INT8)
+#   Caffemodel mandatory properties: model-file, proto-file, output-blob-names
+#   UFF: uff-file, input-dims, uff-input-blob-name, output-blob-names
+#   ONNX: onnx-file
+#
+# Mandatory properties for detectors:
+#   num-detected-classes
+#
+# Optional properties for detectors:
+#   cluster-mode(Default=Group Rectangles), interval(Primary mode only, Default=0)
+#   custom-lib-path,
+#   parse-bbox-func-name
+#
+# Mandatory properties for classifiers:
+#   classifier-threshold, is-classifier
+#
+# Optional properties for classifiers:
+#   classifier-async-mode(Secondary mode only, Default=false)
+#
+# Optional properties in secondary mode:
+#   operate-on-gie-id(Default=0), operate-on-class-ids(Defaults to all classes),
+#   input-object-min-width, input-object-min-height, input-object-max-width,
+#   input-object-max-height
+#
+# Following properties are always recommended:
+#   batch-size(Default=1)
+#
+# Other optional properties:
+#   net-scale-factor(Default=1), network-mode(Default=0 i.e FP32),
+#   model-color-format(Default=0 i.e. RGB) model-engine-file, labelfile-path,
+#   mean-file, gie-unique-id(Default=0), offsets, process-mode (Default=1 i.e. primary),
+#   custom-lib-path, network-mode(Default=0 i.e FP32)
+#
+# The values in the config file are overridden by values set through GObject
+# properties.
+[property]
+gpu-id=0
+model-color-format=0
+#1/255 (pytorch tensor: 0-1, deepstream expects by default 0-255)
+# net-scale-factor=0.003921569
+# offsets=0;0;0
+# onnx-file=pytorch/fender_classifier.onnx
+# model-engine-file=pytorch/fender_classifier.onnx_b1_gpu0_fp32.engine
+
+# net-scale-factor= 0.01735207357279195
+# offsets=123.675;116.28;103.53
+net-scale-factor=0.003922
+# onnx-file=pytorch/mobilenetS_fender_classifier_tao_data.onnx
+onnx-file=fender_mobilenetv2.onnx
+model-engine-file=fender_mobilenetv2.onnx_b1_gpu0_fp32.engine
+
+labelfile-path=fender_labels.txt
+batch-size=1
+network-mode=0
+num-detected-classes=2
+interval=0
+gie-unique-id=1
+is-classifier=1
+output-tensor-meta=0
+maintain-aspect-ratio=0
+classifier-threshold=0.0000
+scaling-filter=0
+scaling-compute-hw=1
+operate-on-gie-id=1

@@ -1,0 +1,6 @@
+[submodule "early-stopping-pytorch"]
+	path = early-stopping-pytorch
+	url = git@github.com:Bjarten/early-stopping-pytorch.git
+[submodule "Classification-Report"]
+	path = Classification-Report
+	url = git@github.com:aman5319/Classification-Report.git
